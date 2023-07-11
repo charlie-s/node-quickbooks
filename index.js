@@ -745,6 +745,20 @@ QuickBooks.prototype.getInvoice = function(id, callback) {
 }
 
 /**
+ * Retrieves the payment link for an Invoice.
+ *
+ * @param  {string} id - The invoice ID.
+ * @param  {function} callback - Callback function which is called with any error and the invoice.
+ */
+QuickBooks.prototype.getInvoiceLink = function(id, callback) {
+  const options = {
+    url: `/invoice/${id}`,
+    qs: { include: 'invoiceLink' }
+  }
+  module.request(this, 'get', options, null, module.unwrap(callback, 'Invoice'))
+}
+
+/**
  * Retrieves the Invoice PDF from QuickBooks
  *
  * @param  {string} Id - The Id of persistent Invoice
